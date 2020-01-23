@@ -6,30 +6,32 @@ type Props = {
   children: string
   type: Button
   onClick: () => void
+  isDisabled?: boolean
 }
 
-export const Button: React.FC<Props> = ({ children, onClick, type }) => {
+export const Button: React.FC<Props> = ({ children, onClick, type, isDisabled = false }) => {
   return (
-    <StyledButton onClick={onClick} buttonType={type}>
+    <StyledButton onClick={onClick} buttonType={type} isDisabled={isDisabled}>
       {children}
     </StyledButton>
   )
 }
 
-const StyledButton = styled.div<{ buttonType: Button }>`
+const StyledButton = styled.div<{ buttonType: Button; isDisabled: boolean }>`
   font-weight: 400;
+  width: min-content;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px 20px;
-  align-self: center;
+
   color: ${theme.color.white};
   border: none;
-  background-color: ${props => getButtonColor(props.buttonType)};
+  background-color: ${props => (props.isDisabled ? theme.color.grey : getButtonColor(props.buttonType))};
 
   &:hover {
-    cursor: pointer;
+    cursor: ${props => (props.isDisabled ? "not-allowed" : "pointer")};
   }
 `
 

@@ -2,7 +2,7 @@ import React from "react"
 
 export const CloseIcon = () => {
   return (
-    <svg id="Layer_1" x="0px" y="0px" viewBox="0 0 492 492" style={{ width: "20px", height: "20px" }}>
+    <svg id="Layer_1" x="0px" y="0px" viewBox="0 0 492 492" style={{ width: "20px", height: "20px", fill: "#3f3f3f" }}>
       <g>
         <g>
           <path
