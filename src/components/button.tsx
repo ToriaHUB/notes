@@ -24,7 +24,7 @@ const StyledButton = styled.div<{ buttonType: Button; isDisabled: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 20px;
+  padding: 3px 20px 5px 20px;
 
   color: ${theme.color.white};
   border: none;

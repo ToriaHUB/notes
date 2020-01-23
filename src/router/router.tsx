@@ -29,6 +29,7 @@ export const Router: React.FC<Props> = () => {
             />
           )}
         />
+        <Route exact path={routes.addNote} component={NoteForm} />
         <Route exact path={routes.editNote} component={NoteForm} />
 
         <Redirect to="/" />

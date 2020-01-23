@@ -1,20 +1,24 @@
 import React from "react"
 import styled from "styled-components"
 import { Close } from "./close"
+import { useHistory } from "react-router-dom"
+import { routes } from "../router"
 
 type Props = {
   children: React.ReactNode
 }
 
 export const NoteContainer: React.FC<Props> = ({ children }) => {
+  const history = useHistory()
+
+  const handleClick = () => {
+    history.push(routes.notes)
+  }
+
   return (
     <NoteWrapper>
       <CloseWrapper>
-        <Close
-          onClick={() => {
-            console.log("closed")
-          }}
-        />
+        <Close onClick={handleClick} />
       </CloseWrapper>
       {children}
     </NoteWrapper>

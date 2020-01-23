@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { Button } from "./button"
 import { NoteContainer } from "./note-container"
+import { useHistory } from "react-router"
+import { routes } from "../router"
 
 type Props = {
   noteData: {
@@ -13,18 +15,19 @@ type Props = {
 }
 
 export const NoteDetail: React.FC<Props> = ({ noteData }) => {
-  const { date, description, title } = noteData
+  const { date, description, title, id } = noteData
+  const history = useHistory()
+
+  const handleClick = () => {
+    history.push(routes.editNote.replace(":id", id), noteData)
+  }
+
   return (
     <NoteContainer>
       <Title>{title}</Title>
       <Description>{description}</Description>
       <Date>{date}</Date>
-      <Button
-        type={"edit"}
-        onClick={() => {
-          console.log("clicked")
-        }}
-      >
+      <Button type={"edit"} onClick={handleClick}>
         Edit
       </Button>
     </NoteContainer>

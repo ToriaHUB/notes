@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { Button } from "./button"
+import { useHistory } from "react-router"
+import { routes } from "../router"
 
 type Props = {
   id: string
@@ -8,13 +10,17 @@ type Props = {
   date: string
 }
 
-export const NotePreview: React.FC<Props> = ({ title, date }) => {
+export const NotePreview: React.FC<Props> = ({ title, date, id }) => {
+  const history = useHistory()
+  const handleDetailClick = () => {
+    history.push(routes.noteDetail.replace(":id", id))
+  }
   return (
     <NoteWrapper>
       <Title>{title}</Title>
       <Date>{date}</Date>
       <Actions>
-        <Button type={"detail"} onClick={() => {}}>
+        <Button type={"detail"} onClick={handleDetailClick}>
           Detail
         </Button>
         <Button type={"delete"} onClick={() => {}}>
