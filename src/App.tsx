@@ -1,8 +1,13 @@
 import React from "react"
 import { Router } from "./router"
+import { AppLayout } from "./components/app-layout"
 
 const App: React.FC = () => {
-  return <Router />
+  return (
+    <AppLayout>
+      <Router />
+    </AppLayout>
+  )
 }
 
 export default App

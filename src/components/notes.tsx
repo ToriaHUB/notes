@@ -1,5 +1,6 @@
 import React from "react"
 import { NotePreview } from "./note-preview"
+import styled from "styled-components"
 
 const mockNotes = [
   { id: "1", title: "Dance with dog", date: "12.01.2020" },
@@ -9,10 +10,14 @@ const mockNotes = [
 
 export const Notes = () => {
   return (
-    <>
+    <NotesWrapper>
       {mockNotes.map((note, index) => (
         <NotePreview key={`${note.id}-${index}`} id={note.id} title={note.title} date={note.date} />
       ))}
-    </>
+    </NotesWrapper>
   )
 }
+
+const NotesWrapper = styled.div`
+  grid-area: content;
+`

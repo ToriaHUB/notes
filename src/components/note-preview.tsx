@@ -32,8 +32,8 @@ export const NotePreview: React.FC<Props> = ({ title, date, id }) => {
 }
 const NoteWrapper = styled.div`
   display: flex;
-  width: 60%;
-  height: 40px;
+  width: 100%;
+  height: 60px;
   justify-content: space-between;
   padding: 10px;
   border-radius: 10px;

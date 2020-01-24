@@ -42,7 +42,7 @@ export const NoteForm: React.FC<Props> = () => {
 
 const Input = styled.input`
   width: 100%;
-  height: 20px;
+  height: 40px;
   padding: 7px 14px;
   border-radius: 5px;
   border: 1px solid #ced4da;
@@ -54,12 +54,12 @@ const Textarea = styled.textarea`
   align-self: center;
   margin-top: 40px;
   width: 100%;
-  height: 100px;
+  height: 180px;
   padding: 7px 14px;
   border-radius: 5px;
   border: 1px solid #ced4da;
   color: #495057;
 `
 const ButtonWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
 `

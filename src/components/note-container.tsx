@@ -28,12 +28,13 @@ export const NoteContainer: React.FC<Props> = ({ children }) => {
 const NoteWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 100%;
   position: relative;
   align-items: center;
   padding: 20px 50px;
   border-radius: 20px;
   background-color: #f5f5f5;
+  grid-area: content;
 `
 const CloseWrapper = styled.div`
   position: absolute;
