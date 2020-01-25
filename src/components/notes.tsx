@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"
 import { NotePreview } from "./note-preview"
 import styled from "styled-components"
 import axios from "axios"
+import { AddButton } from "./add-button"
+import { useHistory } from "react-router"
+import { routes } from "../router"
 
 const fetchNotes = async () => {
   const url = process.env.REACT_APP_DB_URL
@@ -21,6 +24,11 @@ type Props = {
 }
 
 export const Notes: React.FC<Props> = () => {
+  const history = useHistory()
+  const handleAddNote = () => {
+    history.push(routes.addNote)
+  }
+
   useEffect(() => {
     fetchNotes().then(res => setNotes(parseNotesObjectToArray(res.data)))
   }, [])
@@ -44,10 +52,15 @@ export const Notes: React.FC<Props> = () => {
           removeNoteCallback={removeNoteFromLocalState}
         />
       ))}
+      <AddButton onClick={handleAddNote} />
     </NotesWrapper>
   )
 }
 
 const NotesWrapper = styled.div`
+  position: relative;
   grid-area: content;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 `

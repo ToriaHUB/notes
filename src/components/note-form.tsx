@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent } from "react"
 import styled from "styled-components"
 import { Button } from "./button"
 import { NoteContainer } from "./note-container"
+import { useHistory } from "react-router"
+import { routes } from "../router"
 
 type Props = {
   children?: never
@@ -10,6 +12,8 @@ type Props = {
 }
 
 export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
+  const history = useHistory()
+
   const [title, setTitle] = useState((noteDate && noteDate.title) || "")
   const [description, setDescription] = useState((noteDate && noteDate.description) || "")
 
@@ -19,7 +23,12 @@ export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
   const handleChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value)
   }
-  const handleSubmitCallback = () => submitCallback(title, description, noteDate && noteDate.id)
+  const handleSubmitCallback = () => {
+    submitCallback(title, description, noteDate && noteDate.id)
+    setTimeout(() => {
+      history.push(routes.notes)
+    }, 2000)
+  }
 
   return (
     <NoteContainer>

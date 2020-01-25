@@ -56,7 +56,11 @@ const NoteWrapper = styled.div`
 
 const Title = styled.h2`
   display: flex;
+  padding-right: 10px;
   width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 const Date = styled.p`
   display: flex;
