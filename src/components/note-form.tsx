@@ -2,17 +2,16 @@ import React, { useState, ChangeEvent } from "react"
 import styled from "styled-components"
 import { Button } from "./button"
 import { NoteContainer } from "./note-container"
-import { useLocation } from "react-router"
 
 type Props = {
   children?: never
+  noteDate?: { id: string; title: string; description: string; date: string }
+  submitCallback: (title: string, description: string, id: string | undefined) => void
 }
 
-export const NoteForm: React.FC<Props> = () => {
-  const location: { state?: { id: string; title: string; description: string; date: string } } = useLocation()
-
-  const [title, setTitle] = useState((location.state && location.state.title) || "")
-  const [description, setDescription] = useState((location.state && location.state.description) || "")
+export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
+  const [title, setTitle] = useState((noteDate && noteDate.title) || "")
+  const [description, setDescription] = useState((noteDate && noteDate.description) || "")
 
   const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -20,19 +19,14 @@ export const NoteForm: React.FC<Props> = () => {
   const handleChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value)
   }
+  const handleSubmitCallback = () => submitCallback(title, description, noteDate && noteDate.id)
 
   return (
     <NoteContainer>
       <Input placeholder={"Title"} onChange={handleChangeTitle} value={title} />
       <Textarea placeholder={"Description"} onChange={handleChangeDescription} value={description} />
       <ButtonWrapper>
-        <Button
-          isDisabled={!title.trim() || !description.trim()}
-          type={"save"}
-          onClick={() => {
-            console.log("clicked")
-          }}
-        >
+        <Button isDisabled={!title.trim() || !description.trim()} type={"save"} onClick={handleSubmitCallback}>
           Save
         </Button>
       </ButtonWrapper>

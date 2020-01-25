@@ -1,18 +1,48 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { NotePreview } from "./note-preview"
 import styled from "styled-components"
+import axios from "axios"
 
-const mockNotes = [
-  { id: "1", title: "Dance with dog", date: "12.01.2020" },
-  { id: "2", title: "Sleep with dog", date: "13.01.2020" },
-  { id: "3", title: "Eat with dog", date: "15.01.2020" },
-]
+const fetchNotes = async () => {
+  const url = process.env.REACT_APP_DB_URL
+  return await axios.get(`${url}/notes.json`)
+}
 
-export const Notes = () => {
+const parseNotesObjectToArray = (notesObject: {
+  id: { title: string; description: string; date: string }
+}): { id: string; title: string; description: string; date: string }[] => {
+  return Object.entries(notesObject).map(([id, note]) => {
+    return { id: id, ...note }
+  })
+}
+
+type Props = {
+  children?: never
+}
+
+export const Notes: React.FC<Props> = () => {
+  useEffect(() => {
+    fetchNotes().then(res => setNotes(parseNotesObjectToArray(res.data)))
+  }, [])
+
+  const [notes, setNotes] = useState<{ id: string; title: string; description: string; date: string }[]>([])
+  const removeNoteFromLocalState = (id: string) => {
+    setNotes(
+      notes.filter(note => {
+        return note.id !== id
+      })
+    )
+  }
   return (
     <NotesWrapper>
-      {mockNotes.map((note, index) => (
-        <NotePreview key={`${note.id}-${index}`} id={note.id} title={note.title} date={note.date} />
+      {notes.map((note, index) => (
+        <NotePreview
+          key={`${note.id}-${index}`}
+          id={note.id}
+          title={note.title}
+          date={note.date}
+          removeNoteCallback={removeNoteFromLocalState}
+        />
       ))}
     </NotesWrapper>
   )

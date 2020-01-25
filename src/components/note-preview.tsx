@@ -3,18 +3,30 @@ import styled from "styled-components"
 import { Button } from "./button"
 import { useHistory } from "react-router"
 import { routes } from "../router"
+import axios from "axios"
 
 type Props = {
   id: string
   title: string
   date: string
+  removeNoteCallback: (id: string) => void
 }
 
-export const NotePreview: React.FC<Props> = ({ title, date, id }) => {
+const removeNote = async (id: string) => {
+  const url = process.env.REACT_APP_DB_URL
+  await axios.delete(`${url}/notes/${id}.json`)
+}
+
+export const NotePreview: React.FC<Props> = ({ title, date, id, removeNoteCallback }) => {
   const history = useHistory()
   const handleDetailClick = () => {
     history.push(routes.noteDetail.replace(":id", id))
   }
+  const handleRemoveNote = () => {
+    removeNote(id)
+    removeNoteCallback(id)
+  }
+
   return (
     <NoteWrapper>
       <Title>{title}</Title>
@@ -23,7 +35,7 @@ export const NotePreview: React.FC<Props> = ({ title, date, id }) => {
         <Button type={"detail"} onClick={handleDetailClick}>
           Detail
         </Button>
-        <Button type={"delete"} onClick={() => {}}>
+        <Button type={"delete"} onClick={handleRemoveNote}>
           Delete
         </Button>
       </Actions>
