@@ -13,7 +13,7 @@ const editNote = async (title: string, description: string, id: string | undefin
     await axios.put(`${url}/notes/${id}.json`, {
       title: title,
       description: description,
-      date: JSON.stringify(new Date()),
+      date: new Date().toString(),
     })
   } else {
     console.log("Note without id")

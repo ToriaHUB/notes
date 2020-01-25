@@ -4,9 +4,11 @@ import { AppLayout } from "./components/app-layout"
 
 const App: React.FC = () => {
   return (
-    <AppLayout>
-      <Router />
-    </AppLayout>
+    <>
+      <AppLayout>
+        <Router />
+      </AppLayout>
+    </>
   )
 }
 

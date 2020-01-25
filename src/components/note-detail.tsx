@@ -5,6 +5,7 @@ import { NoteContainer } from "./note-container"
 import { useHistory, useParams } from "react-router"
 import { routes } from "../router"
 import axios from "axios"
+import { parseDate } from "../utils"
 
 type Props = {
   children?: never
@@ -38,7 +39,7 @@ export const NoteDetail: React.FC<Props> = () => {
     <NoteContainer>
       <Title>{note.title}</Title>
       <Description>{note.description}</Description>
-      <Date>{note.date}</Date>
+      <Date>{parseDate(note.date)}</Date>
       <Button type={"edit"} onClick={handleClick}>
         Edit
       </Button>

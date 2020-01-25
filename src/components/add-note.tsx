@@ -10,7 +10,7 @@ const addNote = async (title: string, description: string) => {
   await axios.post(`${url}/notes.json`, {
     title: title,
     description: description,
-    date: JSON.stringify(new Date()),
+    date: new Date().toString(),
   })
 }
 

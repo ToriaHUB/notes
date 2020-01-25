@@ -4,6 +4,7 @@ import { Button } from "./button"
 import { useHistory } from "react-router"
 import { routes } from "../router"
 import axios from "axios"
+import { parseDate } from "../utils"
 
 type Props = {
   id: string
@@ -30,7 +31,7 @@ export const NotePreview: React.FC<Props> = ({ title, date, id, removeNoteCallba
   return (
     <NoteWrapper>
       <Title>{title}</Title>
-      <Date>{date}</Date>
+      <Date>{parseDate(date)}</Date>
       <Actions>
         <Button type={"detail"} onClick={handleDetailClick}>
           Detail
@@ -64,7 +65,8 @@ const Title = styled.h2`
 `
 const Date = styled.p`
   display: flex;
-  width: 80px;
+
+  width: 120px;
 `
 const Actions = styled.div`
   display: flex;
