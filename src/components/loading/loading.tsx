@@ -1,13 +1,19 @@
 import React from "react"
 import { Spinner } from "./spinner"
 import styled from "styled-components"
+import { useSelector } from "react-redux"
 
 export const Loading = () => {
-  return (
-    <SpinnerWrapper>
-      <Spinner />
-    </SpinnerWrapper>
-  )
+  const isLoading = useSelector((store: { isLoading: boolean }) => store.isLoading)
+
+  if (isLoading) {
+    return (
+      <SpinnerWrapper>
+        <Spinner />
+      </SpinnerWrapper>
+    )
+  }
+  return null
 }
 
 const SpinnerWrapper = styled.div`

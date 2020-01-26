@@ -25,4 +25,5 @@ const Layout = styled.div`
   grid-template-columns: 20% 1fr 20%;
   height: 100vh;
   width: 100vw;
+  grid-gap: 40px;
 `

@@ -4,6 +4,7 @@ import { Button } from "./button"
 import { NoteContainer } from "./note-container"
 import { useHistory } from "react-router"
 import { routes } from "../router"
+import { useDispatch } from "react-redux"
 
 type Props = {
   children?: never
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const [title, setTitle] = useState((noteDate && noteDate.title) || "")
@@ -24,6 +26,7 @@ export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
     setDescription(event.target.value)
   }
   const handleSubmitCallback = () => {
+    dispatch({ type: "START_LOADING" })
     submitCallback(title, description, noteDate && noteDate.id)
     setTimeout(() => {
       history.push(routes.notes)

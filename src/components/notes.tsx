@@ -5,15 +5,20 @@ import axios from "axios"
 import { AddButton } from "./add-button"
 import { useHistory } from "react-router"
 import { routes } from "../router"
+import { useDispatch } from "react-redux"
 
 const fetchNotes = async () => {
   const url = process.env.REACT_APP_DB_URL
+
   return await axios.get(`${url}/notes.json`)
 }
 
 const parseNotesObjectToArray = (notesObject: {
   id: { title: string; description: string; date: string }
 }): { id: string; title: string; description: string; date: string }[] => {
+  if (notesObject === null) {
+    return []
+  }
   return Object.entries(notesObject).map(([id, note]) => {
     return { id: id, ...note }
   })
@@ -24,13 +29,18 @@ type Props = {
 }
 
 export const Notes: React.FC<Props> = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
   const handleAddNote = () => {
     history.push(routes.addNote)
   }
 
   useEffect(() => {
-    fetchNotes().then(res => setNotes(parseNotesObjectToArray(res.data)))
+    dispatch({ type: "START_LOADING" })
+    fetchNotes().then(res => {
+      setNotes(parseNotesObjectToArray(res.data))
+      dispatch({ type: "STOP_LOADING" })
+    })
   }, [])
 
   const [notes, setNotes] = useState<{ id: string; title: string; description: string; date: string }[]>([])
@@ -41,6 +51,7 @@ export const Notes: React.FC<Props> = () => {
       })
     )
   }
+
   return (
     <NotesWrapper>
       {notes.map((note, index) => (

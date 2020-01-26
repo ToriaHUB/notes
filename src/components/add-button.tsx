@@ -26,7 +26,7 @@ const AddButtonStyle = styled.div`
   border-radius: 50%;
   padding: 15px;
   position: fixed;
-  top: 63px;
+  top: 103px;
   right: 150px;
 
   &:hover {

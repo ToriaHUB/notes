@@ -6,6 +6,7 @@ import { useHistory, useParams } from "react-router"
 import { routes } from "../router"
 import axios from "axios"
 import { parseDate } from "../utils"
+import { useDispatch } from "react-redux"
 
 type Props = {
   children?: never
@@ -17,11 +18,14 @@ const fetchNote = async (id: string) => {
 }
 
 export const NoteDetail: React.FC<Props> = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
   const params: { id?: string | undefined } = useParams()
   useEffect(() => {
+    dispatch({ type: "START_LOADING" })
     fetchNote((params.id && params.id) || "").then(res => setNote(res.data))
   }, [])
+  dispatch({ type: "STOP_LOADING" })
   const [note, setNote] = useState<{ title: string; description: string; date: string }>({
     title: "",
     description: "",
@@ -40,9 +44,11 @@ export const NoteDetail: React.FC<Props> = () => {
       <Title>{note.title}</Title>
       <Description>{note.description}</Description>
       <Date>{parseDate(note.date)}</Date>
-      <Button type={"edit"} onClick={handleClick}>
-        Edit
-      </Button>
+      <ButtonWrapper>
+        <Button type={"edit"} onClick={handleClick}>
+          Edit
+        </Button>
+      </ButtonWrapper>
     </NoteContainer>
   )
 }
@@ -55,4 +61,9 @@ const Description = styled.p`
 `
 const Date = styled.p`
   align-self: flex-start;
+  margin-top: 80px;
+`
+const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 40px;
 `
