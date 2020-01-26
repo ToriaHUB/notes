@@ -5,16 +5,20 @@ import { NoteContainer } from "./note-container"
 import { useHistory } from "react-router"
 import { routes } from "../router"
 import { useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
+
+export type Note = { id: string; title: string; description: string; date: string }
 
 type Props = {
   children?: never
-  noteDate?: { id: string; title: string; description: string; date: string }
+  noteDate?: Note
   submitCallback: (title: string, description: string, id: string | undefined) => void
 }
 
 export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [t] = useTranslation()
 
   const [title, setTitle] = useState((noteDate && noteDate.title) || "")
   const [description, setDescription] = useState((noteDate && noteDate.description) || "")
@@ -39,7 +43,7 @@ export const NoteForm: React.FC<Props> = ({ noteDate, submitCallback }) => {
       <Textarea placeholder={"Description"} onChange={handleChangeDescription} value={description} />
       <ButtonWrapper>
         <Button isDisabled={!title.trim() || !description.trim()} type={"save"} onClick={handleSubmitCallback}>
-          Save
+          {t("buttons.save")}
         </Button>
       </ButtonWrapper>
     </NoteContainer>

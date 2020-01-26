@@ -1,0 +1,11 @@
+{
+  "buttons": {
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "detail": "Detail"
+  },
+  "info": {
+    "noNotes": "Please add your first note"
+  }
+}

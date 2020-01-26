@@ -1,7 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { theme } from "../styles"
+
 type Button = "edit" | "delete" | "save" | "detail"
+
 type Props = {
   children: string
   type: Button
@@ -11,7 +13,7 @@ type Props = {
 
 export const Button: React.FC<Props> = ({ children, onClick, type, isDisabled = false }) => {
   return (
-    <StyledButton onClick={onClick} buttonType={type} isDisabled={isDisabled}>
+    <StyledButton onClick={isDisabled ? undefined : onClick} buttonType={type} isDisabled={isDisabled}>
       {children}
     </StyledButton>
   )

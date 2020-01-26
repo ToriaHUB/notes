@@ -6,11 +6,17 @@ import { NoteDetail } from "../components/note-detail"
 import { AddNote } from "../components/add-note"
 import { EditNote } from "../components/edit-note"
 import { Header } from "../components/header"
+import { ActiveLang, initTranslations } from "../assets/translations"
+import { useSelector } from "react-redux"
 
 type Props = {
   children?: never
 }
 export const Router: React.FC<Props> = () => {
+  const activeLang = useSelector((store: { activeLang: ActiveLang }) => store.activeLang)
+
+  initTranslations(activeLang)
+
   return (
     <>
       <Header />
