@@ -65,6 +65,6 @@ const Date = styled.p`
 `
 const Actions = styled.div`
   display: flex;
-  width: 175px;
-  justify-content: space-between;
+  width: 250px;
+  justify-content: space-evenly;
 `

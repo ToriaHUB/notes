@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##Run project in the development mode:
+
+1.  Clone project from [repo](https://github.com/ToriaHUB/notes)
+2.  Open CLI and install dependencies `yarn install`
+3.  Create file `.env.local` in the project's root directory
+4.  Create your own project on [firebase](https://firebase.google.com/) after that add realtime DB to firebase project
+5.  Save firebase DB's URL to file `.env.local` as variable with name **REACT_APP_DB_URL**
+6.  Start project in the dev mode from CLI: `yarn start` 
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -7,15 +16,10 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
@@ -37,8 +41,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Used dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+*   [Axios](https://github.com/axios/axios)
+*   [I18next](https://www.i18next.com/)
+*   [TypeScript](https://www.typescriptlang.org/)
+*   [Redux](https://redux.js.org/)
+*   [Moment](https://momentjs.com/)
+*   [Prettier](https://prettier.io/docs/en/index.html)
+*   [react-redux](https://github.com/reduxjs/react-redux)
+*   [styled-components](https://styled-components.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
