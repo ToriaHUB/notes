@@ -1,5 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Deploy
+This app is deployed [here](http://toria-notes-app.surge.sh/)
 ## Run project in the development mode:
 
 1.  Clone project from [repo](https://github.com/ToriaHUB/notes)
